@@ -1,5 +1,6 @@
 import { Button, ButtonGroup, Grid, GridItem, Show } from '@chakra-ui/react'
 import NavBar from './Components/NavBar'
+
 function App() {
 
   return (
