@@ -3,6 +3,7 @@ import React from 'react'
 import { Game } from '../hooks/useGames'
 import IconList from './IconList'
 import CriticScore from './CriticScore'
+import getImageMinimized from '../services/image-url'
 
 interface Props{
     game:Game
@@ -10,7 +11,7 @@ interface Props{
 const GameCard = ({game}:Props) => {
   return (
    <Card borderRadius={10} overflow='hidden'>
-    <Image src={game.background_image}/>
+    <Image src={getImageMinimized(game.background_image)}/>
     <CardBody>
         <Heading  fontSize='2xl' >{game.name}</Heading>
         <HStack justifyContent='space-between'>
