@@ -10,7 +10,7 @@ interface Props{
 }
 const GameCard = ({game}:Props) => {
   return (
-   <Card height="278px">
+   <Card >
     <Image src={getImageMinimized(game.background_image)}/>
     <CardBody>
         <Heading  fontSize='2xl' >{game.name}</Heading>
