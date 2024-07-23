@@ -1,4 +1,5 @@
 import useData from './useData';
+import { Genre } from './useGenres';
 export interface Platform {
   id: number,
   slug: string,
@@ -13,8 +14,9 @@ export interface Game {
   metacritic: number
 }
 
-const useGames = () => {
-return useData<Game>('games');
+const useGames = (selectedGenre:Genre|null) => {
+  // as geners is query paramter and it is optional if send it filter games with this genre
+return useData<Game>('games',{params:{genres:selectedGenre?.id}},[selectedGenre?.id]);
 }
 
 export default useGames
