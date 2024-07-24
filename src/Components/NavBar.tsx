@@ -2,11 +2,15 @@ import { HStack, Image } from '@chakra-ui/react'
 import React from 'react'
 import logo from "../assets/react.svg"
 import ColorModeSwitch from './ColorModeSwitch'
-
-const NavBar = () => {
+import Search from './Search'
+interface Props{
+  onSearch:(text:string)=>void
+}
+const NavBar = ({onSearch}:Props) => {
   return (
-    <HStack justifyContent={"space-between"} padding="10px">
+    <HStack  padding="10px">
         <Image src={logo}></Image>
+        <Search onSearch={onSearch}></Search>
        <ColorModeSwitch/>
     </HStack>
   )
