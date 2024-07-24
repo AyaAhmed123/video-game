@@ -16,7 +16,11 @@ export interface Game {
 
 const useGames = (gameQuery:GameQuery) => {
   // as geners is query paramter and it is optional if send it will filter games with this genre
-return useData<Game>('games',{params:{genres:gameQuery.genre?.id,parent_platforms:gameQuery.platform?.id}},[gameQuery]);
+return useData<Game>('games',{params:{
+  genres:gameQuery.genre?.id,
+  parent_platforms:gameQuery.platform?.id,
+  ordering:gameQuery.sort
+}},[gameQuery]);
 }
 
 export default useGames
