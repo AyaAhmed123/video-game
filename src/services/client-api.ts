@@ -2,6 +2,8 @@ import axios, { AxiosRequestConfig } from "axios";
 
 export interface FetchData<T> {
   count: number;
+  // we put next as rawg return in response next for using in pagination or infinite query
+  next: string | null;
   results: T[];
 }
 
