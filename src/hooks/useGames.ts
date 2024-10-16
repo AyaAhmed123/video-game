@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { GameQuery } from "../App";
-import apiClient from "../services/client-api";
-import { FetchData } from "../services/client-api";
+import APIClient, { FetchData } from "../services/client-api";
+
 import { Platform } from "../hooks/usePlatforms";
+const apiClient = new APIClient<Game>("/games");
 export interface Game {
   id: number;
   background_image: string;
@@ -16,16 +17,14 @@ const useGames = (gameQuery: GameQuery) =>
   useQuery<FetchData<Game>, Error>({
     queryKey: ["games", gameQuery],
     queryFn: () =>
-      apiClient
-        .get<FetchData<Game>>("games", {
-          params: {
-            genres: gameQuery.genre?.id,
-            parent_platforms: gameQuery.platform?.id,
-            ordering: gameQuery.sort,
-            search: gameQuery.search,
-          },
-        })
-        .then((res) => res.data),
+      apiClient.getAll({
+        params: {
+          genres: gameQuery.genre?.id,
+          parent_platforms: gameQuery.platform?.id,
+          ordering: gameQuery.sort,
+          search: gameQuery.search,
+        },
+      }),
   });
 // {
 //   // as geners is query paramter and it is optional if send it will filter games with this genre
