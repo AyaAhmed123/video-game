@@ -30,6 +30,7 @@ const useGames = (gameQuery: GameQuery) =>
       // check if response has next so increase by 1
       return lastPage.next ? allPages.length + 1 : undefined;
     },
+    staleTime: 24 * 60 * 60 * 1000,
   });
 // {
 //   // as geners is query paramter and it is optional if send it will filter games with this genre
