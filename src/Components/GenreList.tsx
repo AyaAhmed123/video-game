@@ -11,9 +11,9 @@ import useGenres, { Genre } from "../hooks/useGenres";
 import getImageMinimized from "../services/image-url";
 interface Props {
   onSelectedGenre: (genre: Genre) => void;
-  selectedGenre: Genre | null;
+  selectedGenreId?: number;
 }
-const GenreList = ({ onSelectedGenre, selectedGenre }: Props) => {
+const GenreList = ({ onSelectedGenre, selectedGenreId }: Props) => {
   const { data, error, isLoading } = useGenres();
   if (error) return null;
   if (isLoading) return <Spinner></Spinner>;
@@ -33,7 +33,7 @@ const GenreList = ({ onSelectedGenre, selectedGenre }: Props) => {
             <Button
               whiteSpace="normal"
               textAlign="left"
-              fontWeight={selectedGenre?.id == genre.id ? "bold" : ""}
+              fontWeight={selectedGenreId == genre.id ? "bold" : ""}
               onClick={() => onSelectedGenre(genre)}
               variant="link"
               fontSize="lg"
