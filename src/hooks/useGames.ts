@@ -1,9 +1,9 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { GameQuery } from "../App";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import APIClient, { FetchData } from "../services/client-api";
 
-import { Platform } from "../hooks/usePlatforms";
 import ms from "ms";
+import { Platform } from "../hooks/usePlatforms";
+import useGameQueryStore from "../store";
 const apiClient = new APIClient<Game>("/games");
 export interface Game {
   id: number;
@@ -14,8 +14,9 @@ export interface Game {
   rating_top: number;
 }
 
-const useGames = (gameQuery: GameQuery) =>
-  useInfiniteQuery<FetchData<Game>, Error>({
+const useGames = () => {
+  const gameQuery = useGameQueryStore((s) => s.gameQuery);
+  return useInfiniteQuery<FetchData<Game>, Error>({
     queryKey: ["games", gameQuery],
     queryFn: ({ pageParam = 1 }) =>
       apiClient.getAll({
@@ -33,6 +34,8 @@ const useGames = (gameQuery: GameQuery) =>
     },
     staleTime: ms("24h"),
   });
+};
+
 // {
 //   // as geners is query paramter and it is optional if send it will filter games with this genre
 // return useData<Game>('games',{params:{

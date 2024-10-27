@@ -16,8 +16,6 @@ export interface GameQuery {
 }
 
 function App() {
-  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-
   return (
     <div className="App">
       <Grid
@@ -31,41 +29,24 @@ function App() {
         }}
       >
         <GridItem area={"nav"}>
-          <NavBar
-            onSearch={(search: string) =>
-              setGameQuery({ ...gameQuery, search })
-            }
-          />
+          <NavBar />
         </GridItem>
         <Show above="lg">
           <GridItem area={"aside"} paddingX={2}>
-            <GenreList
-              onSelectedGenre={(genre) =>
-                setGameQuery({ ...gameQuery, genreId: genre.id })
-              }
-              selectedGenreId={gameQuery.genreId}
-            />
+            <GenreList />
           </GridItem>
         </Show>
         <GridItem area={"main"}>
-          <HeadingGames gameQuery={gameQuery} />
+          <HeadingGames />
           <Flex paddingLeft={2} marginBottom={5}>
             <Box marginRight={5}>
-              <PlatformSelector
-                onSelectedPlatform={(platform) =>
-                  setGameQuery({ ...gameQuery, platformId: platform.id })
-                }
-                selectedPlatformId={gameQuery.platformId}
-              />
+              <PlatformSelector />
             </Box>
             <Box>
-              <SortSelector
-                onSelectedOrder={(sort) => setGameQuery({ ...gameQuery, sort })}
-                selectedOrder={gameQuery.sort}
-              ></SortSelector>
+              <SortSelector></SortSelector>
             </Box>
           </Flex>
-          <GameGrid gameQuery={gameQuery} />
+          <GameGrid />
         </GridItem>
       </Grid>
     </div>
