@@ -23,5 +23,9 @@ class APIClient<T> {
     axiosInstance
       .get<FetchData<T>>(this.endPoint, config)
       .then((res) => res.data);
+
+  // it must be arrow function and name must not be camel case it must be _ so get_by_id not getById
+  get_by_id = (id: string | number) =>
+    axiosInstance.get<T>(this.endPoint + "/" + id).then((res) => res.data);
 }
 export default APIClient;
